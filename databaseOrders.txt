@@ -1,0 +1,70 @@
+drop database if exists orders;
+create database orders;
+use orders;
+
+create table product
+(idProduct int unique auto_increment primary key,
+nameProduct varchar(50), 
+quantity int,
+price float,
+
+index(idProduct));
+
+create table customer
+(idCustomer int unique auto_increment primary key,
+nameCustomer varchar(100),
+address varchar(150),
+phoneNumber varchar(11),
+email varchar(100),
+cnp varchar(15),
+username varchar(100),
+passwordCustomer varchar(50),
+
+index(idCustomer));
+
+create table orders
+(idOrder int primary key,
+statusOrder varchar(30),
+dateOrder date,
+idCustomer int,
+idProduct int, 
+noProducts int,
+
+foreign key(idCustomer) references customer(idCustomer),
+foreign key(idProduct) references product(idProduct),
+
+index(idOrder));
+
+insert into product values
+(1, 'Kryolan Multi Gel Glitter Fine', 10, 12),
+(2, 'Cinema Secrets Ultimate Foundation', 50, 40),
+(3, 'Cinema Secrets Ultimate Foundation Palette', 100, 50),
+(4, 'Cinema Secrets Super Sealer', 200, 35),
+(5, 'Kryolan 5 colors Cake Eye Liner Set', 20, 25);
+
+
+insert into customer values
+(300,'Ionescu Anda','Cluj-Napoca,str.Florilor,nr.5',
+'0732568910','anda.ionescu@yahoo.com', '2945672524256','anda_ion', 'ionescuanda'),
+(301,'Popescu George','Deva,str. M.Eminescu,nr.125',
+'0744510714','george.p@yahoo.com', '1940912894292','george.popescu', 'eminescu521'),
+(302,'Jurca Roxana','Cluj-Napoca,str.Ciresilor,nr.73',
+'0728980765','jurcaroxana@yahoo.com','2940506205576', 'roxi_jurca', 'mihai123'),
+(303,'Stef Raluca','Timisoara,str. Nicolae Iorga,nr.64',
+'0734876234','raluca@gmail.com', '2942304905327', 'stef.raluca.21', 'facebook'),
+(304,'Bolba Raluca','Bucuresti,sector 4,str.1 Mai,nr.97',
+'0768934002','b.raluca.bolba@gmail.com', '2940308948196', 'ralu_b', 'christmas'),
+(305,'Dan Petru','Brasov,str. Avram Iancu,nr.103',
+'0778623436','dan.petru@yahoo.com', '1945662882256', 'danut123', 'metallica'),
+(306, 'Adam Andrei','Alba-Iulia,str.Sebesului,nr.23',
+'0732568910','andrei.adam@yahoo.com', '1940923918218', 'a.andrei', 'iuliaalba'),
+(307,'Petrescu Matei','Piatra Neamt,str.Vladimirescu,nr.56',
+'0767543028','matei.p@gmail.com', '1941227885674', 'matei_32', 'password');
+
+insert into orders values
+(10, 'Created', '2014-10-08', 300, 1, 2),
+(11, 'InProgress', '2015-04-12', 302, 4, 1),
+(12, 'Created', '2015-03-21', 305, 5, 3),
+(13, 'Completed', '2015-04-11', 304, 2, 1);
+
+
